@@ -34,3 +34,5 @@ suggestion IA/docs
 
 /generated/prisma
 /server/generated/
+Backend/.env.development
+Backend/.env.production

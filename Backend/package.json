@@ -1,0 +1,30 @@
+{
+	"name": "backend",
+	"type": "module",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "ts-node server.ts",
+		"build": "tsc",
+		"start": "ts-node server.ts",
+		"test": "vitest",
+		"test:ui": "vitest --ui"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"@dotenvx/dotenvx": "^1.48.4",
+		"@fastify/cookie": "^11.0.2",
+		"@fastify/jwt": "^10.0.0",
+		"bcrypt": "^6.0.0",
+		"dotenv": "^17.2.1",
+		"fastify": "^5.5.0",
+		"mysql2": "^3.14.3",
+		"nodemailer": "^7.0.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.3.0"
+	}
+}
