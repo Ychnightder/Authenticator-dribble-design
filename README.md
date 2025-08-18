@@ -1,4 +1,4 @@
-# **🔐 Auth App – Fastify + JWT + Email OTP**
+# **🔐 Auth App – Express + JWT + Email OTP**
 
 📌 Description
 ![original.jpg](original.jpg)
@@ -8,9 +8,7 @@ Design by : https://dribbble.com/altingrc
 
 Ce projet est une API REST d’authentification construite avec :
 
-Fastify comme framework backend.
-
-SQLite comme base de données locale (simple et pratique pour le dev).
+Express comme framework backend.
 
 JWT (JSON Web Tokens) pour gérer les sessions utilisateurs.
 

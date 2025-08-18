@@ -1,12 +1,11 @@
 {
 	"name": "backend",
-	"type": "module",
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"dev": "ts-node server.ts",
+		"dev": "ts-node app.ts",
 		"build": "tsc",
-		"start": "ts-node server.ts",
+		"start": "ts-node app.ts",
 		"test": "vitest",
 		"test:ui": "vitest --ui"
 	},
@@ -16,15 +15,22 @@
 	"description": "",
 	"dependencies": {
 		"@dotenvx/dotenvx": "^1.48.4",
-		"@fastify/cookie": "^11.0.2",
-		"@fastify/jwt": "^10.0.0",
 		"bcrypt": "^6.0.0",
 		"dotenv": "^17.2.1",
-		"fastify": "^5.5.0",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
 		"mysql2": "^3.14.3",
 		"nodemailer": "^7.0.5"
 	},
 	"devDependencies": {
-		"@types/node": "^24.3.0"
+		"@types/bcrypt": "^6.0.0",
+		"@types/cookie-parser": "^1.4.9",
+		"@types/express": "^5.0.3",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^24.3.0",
+		"cookie-parser": "^1.4.7",
+		"ts-node": "^10.9.2",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.9.2"
 	}
 }

@@ -1,5 +1,25 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=WebStorm
+### Register un nouvel utilisateur
 
-###
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "monpassword"
+}
+
+
+### Login pour récupérer le token JWT
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "monpassword"
+}
+
+
+### Accéder au profil protégé (remplacer TOKEN par celui reçu au login)
+GET http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1NTUxNzUxLCJleHAiOjE3NTU1NTUzNTF9.PMwnKTBp-1qFFo3xm0JeXZjXVckN_Ca-xLPeyu9K6aA
+  

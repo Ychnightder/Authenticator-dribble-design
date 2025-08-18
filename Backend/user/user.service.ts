@@ -1,5 +1,5 @@
 import { pool } from '../common/connectionDb';
-import { user } from './user.model';
+import {User} from './user.model';
 import { hashP } from '../common/hashPassword';
 /* 
 create user 
@@ -15,10 +15,13 @@ export const userService = {
 	 * @param {user} User
 	 * @returns {Promise<boolean>}
 	 */
-	async createUser(User: user): Promise<boolean> {
-		const passhas = await hashP(User.password);
+	async createUser(user: User): Promise<boolean> {
 
-		const [result] = await pool.query(`INSERT INTO users (email, password, is_verified) VALUES (?, ?, ?)`, [User.email, passhas, User.is_verified]);
+		const [result] = await pool.query(`INSERT INTO users (email, password, is_verified) VALUES (?, ?, ?)`, [
+			user.email,
+			user.password,
+			user.is_verified ?? false,
+		]);
 		return (result as any).affectedRows > 0;
 	},
 
@@ -30,7 +33,7 @@ export const userService = {
 	 * @param {?string} [email]
 	 * @returns {Promise<user | null>}
 	 */
-	async getUser(id?: number, email?: string): Promise<user | null> {
+	async getUser(id?: number, email?: string): Promise<User | null> {
 		let query = '';
 		let params: (number | string)[] = [];
 
@@ -45,36 +48,34 @@ export const userService = {
 		}
 
 		const [rows] = await pool.query(query, params);
-		const users = rows as user[];
+		const users = rows as User[];
 		return users.length > 0 ? users[0] : null;
 	},
 
-
-    
 	/**
-     * delete user
-     *
-     * @async
-     * @param {?number} [id] 
-     * @param {?string} [email] 
-     * @returns {Promise<boolean>} 
-     */
-    async deleteUser(id?: number, email?: string): Promise<boolean> {
-        let query ='' ;
-        let params: (number | string)[] = [];
+	 * delete user
+	 *
+	 * @async
+	 * @param {?number} [id]
+	 * @param {?string} [email]
+	 * @returns {Promise<boolean>}
+	 */
+	async deleteUser(id?: number, email?: string): Promise<boolean> {
+		let query = '';
+		let params: (number | string)[] = [];
 
-        if (id) {
-            query = `DELETE from users WHERE id = ?`;
-            params = [id];
-        } else if (email) {
-            query = `DELETE from users WHERE email = ?`;
-            params = [email];
-        } else {
-            throw new Error('id ou email requis');
-        }
-        
+		if (id) {
+			query = `DELETE from users WHERE id = ?`;
+			params = [id];
+		} else if (email) {
+			query = `DELETE from users WHERE email = ?`;
+			params = [email];
+		} else {
+			throw new Error('id ou email requis');
+		}
+
 		const [rows] = await pool.query(query, params);
 
-        return (rows as any).affectedRows > 0;
-    },
+		return (rows as any).affectedRows > 0;
+	},
 };
