@@ -15,3 +15,4 @@ JWT (JSON Web Tokens) pour gérer les sessions utilisateurs.
 Email OTP (One-Time Password) pour la vérification d’email.
 
 ⚡ Objectif : Fournir un système d’inscription, vérification d’email et connexion sécurisé.
+

@@ -7,4 +7,6 @@ export interface  User {
     email : string;
     password : string;
     is_verified? : boolean;
+    verifyOtp? : string;
+    verifyOtpExpiresAt?: Date;
 }

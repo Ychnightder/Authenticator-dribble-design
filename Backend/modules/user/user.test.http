@@ -18,8 +18,12 @@ Content-Type: application/json
   "password": "monpassword"
 }
 
+###
+POST http://localhost:3000/users/logout
+
+
 
 ### Accéder au profil protégé (remplacer TOKEN par celui reçu au login)
 GET http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1NTUxNzUxLCJleHAiOjE3NTU1NTUzNTF9.PMwnKTBp-1qFFo3xm0JeXZjXVckN_Ca-xLPeyu9K6aA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1ODMxOTU4LCJleHAiOjE3NTU4MzU1NTh9.lywUQM1-uoF1-EX1OyEbCAPYgw6nIKiXGBzAtX6-zL0
   

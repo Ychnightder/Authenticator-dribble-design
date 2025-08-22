@@ -1,18 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { UserPayload } from "../types";
 
 
-interface UserPayload {
-	id: number;
-	email: string;
-}
-
-
-declare module 'express-serve-static-core' {
-	interface Request {
-		user?: UserPayload;
-	}
-}
 
 const SECRET_KEY = process.env.JWT_SECRET || "supersecret";
 
