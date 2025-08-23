@@ -89,6 +89,15 @@ export const userService = {
 		}
 	},
 
+	
+
+	/**
+	 * verif mail
+	 *
+	 * @async
+	 * @param {string} email 
+	 * @returns {Promise<boolean>} 
+	 */
 	async updateVerification(email: string): Promise<boolean> {
 		try {
 			const [result] = await pool.query(`UPDATE users SET is_verified = true, verifyOtp = NULL, verifyOtpExpiresAt = NULL WHERE email = ?`, [email]);

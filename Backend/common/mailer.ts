@@ -8,11 +8,10 @@ export const transporter = nodemailer.createTransport({
 	port: 465,
 	secure: true,
 	auth: {
-		user: process.env.EMAIL,
+		user: process.env.USER_EMAIL,
 		pass: process.env.PASS_EMAIL,
 	},
 });
-
 
 // export const transporter = nodemailer.createTransport({
 // 	host: 'live.smtp.mailtrap.io',
@@ -24,10 +23,10 @@ export const transporter = nodemailer.createTransport({
 // 	},
 // });
 
-export async function sendOTP(email: string, otp: string)  {
+export async function sendOTP(email: string, otp: string) {
 	await transporter.sendMail(
 		{
-			from: `"Auth App" <${process.env.EMAIL}>`,
+			from: `"Auth App" <${process.env.USER_EMAIL}>`,
 			to: email,
 			subject: 'Vérification de votre email',
 			html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">

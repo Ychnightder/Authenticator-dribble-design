@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use('/users', userRoutes);
 
-sendOTP("datopin134@amcret.com", '942498');
+
 
 
 app.listen(3000, () => {

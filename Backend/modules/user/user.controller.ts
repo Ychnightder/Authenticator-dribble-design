@@ -73,13 +73,7 @@ export const userController = {
 	},
 
 	async logout(req: Request, res: Response) {
-		res.clearCookie('token', {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
-			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-			maxAge: 7 * 24 * 60 * 60 * 1000,
-		});
-
+		res.clearCookie('token');
 		return res.json({ success: true });
 	},
 
