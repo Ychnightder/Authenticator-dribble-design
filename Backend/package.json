@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"dev": "ts-node app.ts",
+		"dev": "nodemon  --exec ts-node app.ts",
+		"dev2": "ts-node app.ts",
 		"build": "tsc",
 		"start": "ts-node app.ts",
 		"test:ui": "vitest --ui"

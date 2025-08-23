@@ -1,3 +1,5 @@
+import { ResultSetHeader } from 'mysql2';
+import { generateOtp } from '../../common/otp';
 import { pool } from '../../config/database';
 import {User} from './user.model';
 /* 
@@ -89,14 +91,12 @@ export const userService = {
 		}
 	},
 
-	
-
 	/**
 	 * verif mail
 	 *
 	 * @async
-	 * @param {string} email 
-	 * @returns {Promise<boolean>} 
+	 * @param {string} email
+	 * @returns {Promise<boolean>}
 	 */
 	async updateVerification(email: string): Promise<boolean> {
 		try {
@@ -105,6 +105,34 @@ export const userService = {
 		} catch (error) {
 			console.error(error);
 			return false;
+		}
+	},
+
+	/**
+	 * Met à jour le code OTP et son expiration pour un utilisateur
+	 *
+	 * @async
+	 * @param {string} email - Email de l'utilisateur
+	 * @returns {Promise<string | null>} - Retourne le nouvel OTP si succès, sinon null
+	 */
+	async updateOtpCode(email: string): Promise<string | null> {
+		try {
+			const otp = generateOtp();
+			const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // expire dans 10 min
+
+			const [result] = await pool.query<ResultSetHeader>(`UPDATE users SET verifyOtp = ?, verifyOtpExpiresAt = ? WHERE email = ?`, [
+				otp,
+				expiresAt,
+				email,
+			]);
+
+			if (result.affectedRows > 0) {
+				return otp; 
+			}
+
+			return null;
+		} catch (error) {
+			return null;
 		}
 	},
 };

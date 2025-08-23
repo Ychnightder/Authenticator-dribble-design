@@ -21,21 +21,18 @@ export const userController = {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		// Génère OTP et expiration
-		const otp = generateOtp();
-		const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
 		const success = await userService.createUser({
 			email,
 			password: hashedPassword,
 			is_verified: false,
-			verifyOtp: otp,
-			verifyOtpExpiresAt: expiresAt,
 		});
 
 		if (!success) {
 			return res.status(500).json({ message: 'Erreur création utilisateur' });
 		}
-		await sendOTP(email, otp);
+		const otp = await userService.updateOtpCode(email);
+		await sendOTP(email, otp + '');
 
 		return res.json({ message: 'Utilisateur créé !', success: true });
 	},
@@ -81,7 +78,7 @@ export const userController = {
 	async profile(req: Request, res: Response) {
 		return res.json({ user: req.user });
 	},
-
+	// verification Email
 	async verifyEmail(req: Request, res: Response) {
 		const { email, otp } = req.body;
 
@@ -109,6 +106,29 @@ export const userController = {
 		}
 
 		return res.json({ message: 'Email vérifié avec succès', success: true });
+	},
+	// Envoie code OTP
+	async sendEmail(req: Request, res: Response) {
+		try {
+			const { email } = req.body;
+
+			if (!email) {
+				return res.status(400).json({ message: 'Email est requis', success: false });
+			}
+
+			const otp = await userService.updateOtpCode(email);
+
+			if (!otp) {
+				return res.status(404).json({ message: 'Utilisateur non trouvé', success: false });
+			}
+
+			await sendOTP(email, otp);
+
+			return res.json({ message: 'Email envoyé avec succès', success: true });
+		} catch (error) {
+			console.error('Erreur sendEmail:', error);
+			return res.status(500).json({ message: 'Erreur serveur lors de l envoi du code', success: false });
+		}
 	},
 };
 
