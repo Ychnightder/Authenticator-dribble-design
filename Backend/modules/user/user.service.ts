@@ -15,13 +15,12 @@ export const userService = {
 	 * @returns {Promise<boolean>}
 	 */
 	async createUser(user: User): Promise<boolean> {
-
 		try {
-			const [result] = await pool.query(`INSERT INTO users (email, password, is_verified) VALUES (?, ?, ?)`, [
-				user.email,
-				user.password,
-				user.is_verified ?? false,
-			]);
+			const [result] = await pool.query(
+				`INSERT INTO users (email, password, is_verified, verifyOtp, verifyOtpExpiresAt)
+       			VALUES (?, ?, ?, ?, ?)`,
+				[user.email, user.password, user.is_verified ?? false, user.verifyOtp, user.verifyOtpExpiresAt]
+			);
 			return (result as any).affectedRows > 0;
 		} catch (error) {
 			return false;
@@ -86,6 +85,16 @@ export const userService = {
 
 			return (rows as any).affectedRows > 0;
 		} catch (error) {
+			return false;
+		}
+	},
+
+	async updateVerification(email: string): Promise<boolean> {
+		try {
+			const [result] = await pool.query(`UPDATE users SET is_verified = true, verifyOtp = NULL, verifyOtpExpiresAt = NULL WHERE email = ?`, [email]);
+			return (result as any).affectedRows > 0;
+		} catch (error) {
+			console.error(error);
 			return false;
 		}
 	},

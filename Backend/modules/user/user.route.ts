@@ -8,6 +8,7 @@ userRoutes.post('/register', userController.register);
 userRoutes.post('/login', userController.login);
 userRoutes.post('/logout', userController.logout);
 userRoutes.get('/profile', authenticateToken, userController.profile);
+userRoutes.post('/verify-email', userController.verifyEmail);
 
 
 export default userRoutes ;

@@ -4,17 +4,25 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "datopin134@amcret.com",
   "password": "monpassword"
 }
+###
 
+POST http://localhost:3000/users/verify-email
+Content-Type: application/json
+
+{
+  "email": "datopin134@amcret.com",
+  "otp": "723797"
+}
 
 ### Login pour récupérer le token JWT
 POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "datopin134@amcret.com",
   "password": "monpassword"
 }
 
@@ -25,5 +33,5 @@ POST http://localhost:3000/users/logout
 
 ### Accéder au profil protégé (remplacer TOKEN par celui reçu au login)
 GET http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU1ODMxOTU4LCJleHAiOjE3NTU4MzU1NTh9.lywUQM1-uoF1-EX1OyEbCAPYgw6nIKiXGBzAtX6-zL0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJkYXRvcGluMTM0QGFtY3JldC5jb20iLCJpYXQiOjE3NTU5MjA5OTMsImV4cCI6MTc1NTkyMTg5M30.Zs-OeKjClKtXJwAXhe1sGHj-oSNEyqXGmBuEqEaOtr8
   

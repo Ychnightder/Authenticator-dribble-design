@@ -4,7 +4,6 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "ts-node app.ts",
-		"dev2": "nodemon app.ts",
 		"build": "tsc",
 		"start": "ts-node app.ts",
 		"test:ui": "vitest --ui"
@@ -14,7 +13,6 @@
 	"license": "ISC",
 	"description": "",
 	"dependencies": {
-		"@dotenvx/dotenvx": "^1.48.4",
 		"bcrypt": "^6.0.0",
 		"cookie-parser": "^1.4.7",
 		"crypto": "^1.0.1",
