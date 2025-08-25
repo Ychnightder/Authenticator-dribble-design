@@ -6,6 +6,7 @@
   <router-view></router-view>
 </template>
 
-<style>
+<style >
+  @import './style/main.css';
 
 </style>

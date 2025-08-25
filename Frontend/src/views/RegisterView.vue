@@ -1,6 +1,6 @@
   
   <script setup lang="ts">
-import Title from "../components/Title.vue"
+import Title from "../components/shared/Title.vue"
 
   </script>
 <template>

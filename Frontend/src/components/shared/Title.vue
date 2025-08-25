@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps<{
+const props  = defineProps<{
   title: string;
-  text: string;
+  text: string
+  ;
 }>();
-</script>
+  </script>
 
 <template>
   <div class="wrapper">
@@ -15,8 +16,6 @@ const props = defineProps<{
 </template>
 
 <style scoped >
-@import '../style/main.css';
-
 .wrapper {
   width: 415px;
   height: 100px;
@@ -31,7 +30,26 @@ const props = defineProps<{
   font-weight: bold;
 }
 .subtitle {
+  text-align: center;
   font-size: 16px;
+}
+
+
+@media screen and (max-width: 400px) {
+  .wrapper {
+    width: 100%;
+    height: 100px;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
 }
 
 
