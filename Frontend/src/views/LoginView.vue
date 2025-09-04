@@ -1,10 +1,26 @@
 <script setup lang="ts">
-import FormField from "../components/form/FormField.vue";
 import Title from "../components/shared/Title.vue"
+import AuthForm from "../components/form/AuthForm.vue";
 </script>
 
 <template>
-  <Title title="Log in" text="Log in and access your Calendora dashboard"/>
-   <FormField type="email"  placeholder="Email" label="Email" modelValue=""/>
+  <div class="bg">
+ <Title title="Log in" text="Log in and access your Calendora dashboard"/>
+     <AuthForm
+    endpoint="http://localhost:3000/users/login"
+    buttonText="Log in"
+  />
+  </div>
+ 
 </template>
 
+<style scoped>
+.bg{
+    display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 415px;
+  height: auto;
+  background: #fff;
+}
+</style>

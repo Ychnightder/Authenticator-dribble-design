@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './modules/user/user.route';
-import { transporter, sendOTP } from './common/mailer';
+import cors from 'cors';
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRoutes);

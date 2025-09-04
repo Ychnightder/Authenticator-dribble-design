@@ -21,6 +21,8 @@ body{
     height: 100vh;
     font-family: var(--font-main);
      color: var(--primary);
+  letter-spacing: -1px;
+
 }
 
 

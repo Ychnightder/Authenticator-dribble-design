@@ -17,21 +17,24 @@ const props  = defineProps<{
 
 <style scoped >
 .wrapper {
-  width: 415px;
+  width: 355px;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
+  color: var(--primary);
 
 }
 .title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
+
 }
 .subtitle {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
+  letter-spacing: -1px;
 }
 
 
