@@ -10,9 +10,14 @@ import AuthForm from "../components/form/AuthForm.vue";
   <Title title="Create an account" text="Enter all your information below to create your account"/>
 
     <AuthForm
-    endpoint="http://localhost:3000/users/register"
-    buttonText="sign up"
+    endpoint="http://localhost:3000/users/register" 
+    buttonText="Sign up"
+
+    AlternativeText="Already have an account?" 
+    btnAlternativeLink="/login"
+    btnAlternativeText="Login"
   />
+  
   </div>
 </template>
 
@@ -24,5 +29,7 @@ import AuthForm from "../components/form/AuthForm.vue";
   width: 450px;
   height: auto;
   background: #fff;
+    padding: 0 0  10px 0;
+
 }
 </style>

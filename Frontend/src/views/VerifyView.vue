@@ -14,13 +14,15 @@
             v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Invalid email' : null,
       ]"
     />
+   <br /><br />
+    <ButtonLink text="login" urlLink="register" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import FormField from "../components/form/FormField.vue";
-
+import ButtonLink from "../components/button/ButtonLink.vue";
 const model = ref("");
 
 </script>
