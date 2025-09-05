@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps<{
+defineProps<{
   text: string;
 }>();
 
@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <button class="btn" type="submit"> {{ props.text }}</button>
+    <button class="btn" type="submit"> {{ text }}</button>
 </template>
 <style> 
   .btn{
