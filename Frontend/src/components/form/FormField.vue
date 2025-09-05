@@ -76,6 +76,7 @@ watch(() => props.modelValue, (newVal) => {
 	border: 1px solid #ddd;
 	outline: unset;
 	padding: 13px;
+	  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 .label input.input-error {
   border-color: rgba(255, 0, 0, 0.531);

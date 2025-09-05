@@ -25,6 +25,8 @@ const props = defineProps<{
     background-color: #fff;
     color: var(--primary) ;
     border: 1px solid #ddd;
+	  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
     font-size: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease-in;

@@ -67,13 +67,15 @@
     }
     if (!valid) return;
     try {
-      console.log(formData)
+      // console.log(formData)
       const response = await axios.post(props.endpoint, formData);
-      console.log("✅ Success:", response.data);
+      // console.log("✅ Success:", response.data);
 
       // Exemple : si inscription, rediriger vers la vérification
       if (isRegister.value) {
-        router.push("/verify");
+          // router.push({ path: "/verify", query: { email: formData.email } });
+            localStorage.setItem('emailToVerify', formData.email);
+            router.push("/verify");
       } else {
         router.push("/Welcome"); // ou autre page
       }
@@ -93,7 +95,7 @@
         :rules="field.rule" />
     </div>
     <Button :text="buttonText" />
-    <p class="text-register" v-if="isRegister">By clicking continuer you agree to our Terms ot Serwce <br></br>
+    <p class="text-register" v-if="isRegister">By clicking continuer you agree to our Terms ot Service <br></br>
       and Privacy Policy.</p>
     <LinkForm :text="AlternativeText" />
     <ButtonLink :text="btnAlternativeText" :urlLink="btnAlternativeLink" />
