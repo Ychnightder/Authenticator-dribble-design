@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <button class="btn" type="submit"> {{ text }}</button>
+    <button class="btn" type="submit"> {{ props.text }}</button>
 </template>
 <style> 
   .btn{

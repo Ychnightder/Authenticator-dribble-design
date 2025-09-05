@@ -69,8 +69,7 @@
     try {
       // console.log(formData)
       const response = await axios.post(props.endpoint, formData);
-      // console.log("✅ Success:", response.data);
-
+       console.log("✅ Success:", response.data);
       // Exemple : si inscription, rediriger vers la vérification
       if (isRegister.value) {
           // router.push({ path: "/verify", query: { email: formData.email } });

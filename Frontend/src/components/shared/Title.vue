@@ -10,7 +10,7 @@ const props  = defineProps<{
 
 <template>
   <div class="wrapper">
-    <h1 class="title">{{ title }}</h1>
+    <h1 class="title">{{ props.title }}</h1>
     <p class="subtitle">{{ text }}</p>
   </div>
 </template>
