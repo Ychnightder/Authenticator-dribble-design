@@ -46,11 +46,10 @@ watch(() => props.modelValue, (newVal) => {
 }, { immediate: true });
 
 </script>
-
 <template>
 	<label class="label" :for="type">
 		<span>{{ label }}</span> 
-		<input :id="type" :type="type" :placeholder="placeholder" :value="modelValue" @input="onInput"  :class="{ 'input-error': errors.length > 0 }"  />
+		<input :id="type" :type="type" :placeholder="placeholder" :value="modelValue" @input="onInput"  :class="{ 'input-error': errors.length > 0  }"  />
 	</label>
 	  <span v-for="(err, i) in errors" :key="i" class="error">
     {{ err }}

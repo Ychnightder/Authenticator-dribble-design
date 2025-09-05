@@ -45,7 +45,7 @@ async function handleSubmit() {
       errorMessage.value = "Erreur de connexion au serveur";
     }
   }
-}
+} 
 
 
 

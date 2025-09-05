@@ -45,7 +45,7 @@
 
 
 
-    const errors = reactive<{ [key: string]: string | null }>({});
+  const errors = reactive<{ [key: string]: string | null }>({});
 
   async function handleSubmit() {
     let valid = true;
@@ -72,13 +72,20 @@
       // Exemple : si inscription, rediriger vers la vérification
       if (isRegister.value && response) {
           // router.push({ path: "/verify", query: { email: formData.email } });
-            localStorage.setItem('emailToVerify', formData.email);
-            router.push("/verify");
+        localStorage.setItem('emailToVerify', formData.email);
+        router.push("/verify");
       } else {
         router.push("/Welcome"); // ou autre page
       }
     } catch (error: any) {
-      console.error("❌ API error:", error.response?.data || error.message);
+      // console.error("❌ API error:", error.response?.data || error.message);
+
+      if (axios.isAxiosError(error) && error.response?.data?.message === 'Email non vérifié. Vérifiez votre boîte mail.') {
+        localStorage.setItem('emailToVerify', formData.email);
+        router.push("/verify");
+      }
+
+
     }
   }
 
@@ -90,7 +97,7 @@
 
     <div v-for="field in fields" :key="field.name">
       <FormField v-model="formData[field.name]" :label="field.label" :type="field.type" :placeholder="field.placeholder"
-        :rules="field.rule" />
+        :rules="field.rule"   />
     </div>
     <Button :text="buttonText" />
     <p class="text-register" v-if="isRegister">By clicking continuer you agree to our Terms ot Service <br></br>

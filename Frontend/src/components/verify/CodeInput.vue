@@ -39,7 +39,7 @@ function onPaste(e: ClipboardEvent) {
 
   nextTick(() => {
     if (digits.length === length) {
-      checkComplete();
+      checkComplete(); 
     } else {
       inputs.value[digits.length]?.focus();
     }
