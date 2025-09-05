@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import axios from "axios";
-import CodeInput from "../components/verify/codeInput.vue";
+import CodeInput from "../components/verify/CodeInput.vue";
 import Button from "../components/button/Button.vue";
 import ImageVerify from "../components/verify/ImageVerify.vue";
 import LinkForm from "../components/form/LinkForm.vue";
