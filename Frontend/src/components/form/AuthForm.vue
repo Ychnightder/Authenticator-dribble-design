@@ -16,36 +16,39 @@
     btnAlternativeLink: string;
 
   }>();
-   const router = useRouter()
-  const emailRules = [
-    (v: string) => {
-      if (!v) return null; // vide = pas d'erreur
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return regex.test(v) ? null : "Email invalide";
-    },
-  ];
+  const router = useRouter()
   const isRegister = ref(props.endpoint.includes("register"));
-  const passwordRule = (v: string) => {
-    if (!v) return null; // vide = pas d'erreur
-    if (!isRegister.value) return null; // règle stricte uniquement pour l'inscription
-    if (v.length < 6) return "Le mot de passe doit contenir au moins 6 caractères";
-    if (!/[A-Z]/.test(v)) return "Le mot de passe doit contenir une majuscule";
-    if (!/[0-9]/.test(v)) return "Le mot de passe doit contenir un chiffre";
-    return null;
-  };
 
+ const emailRules = [
+  (v: string) => (!v ? "Email is required" : null), // 🔥 required
+  (v: string) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Invalid email" : null), // regex seulement si non vide
+];
+
+const passwordRules = [
+  (v: string) => (!v ? "Password is required" : null), // 🔥 required
+  (v: string) => {
+    if (!v) return null; // si vide, ne pas valider ici (la règle required gère déjà)
+    if (!isRegister.value) return null;
+    if (v.length < 6) return "Password must be at least 6 characters";
+    if (!/[A-Z]/.test(v)) return "Password must contain an uppercase letter";
+    if (!/[0-9]/.test(v)) return "Password must contain a number";
+    return null;
+  },
+];
 
   const fields = [
     { name: 'email', label: 'Email', type: 'email', placeholder: 'Email', required: false, rule: emailRules },
-    { name: 'password', label: 'Password', type: 'password', placeholder: 'Password', required: false, rule: [passwordRule] }
+    { name: 'password', label: 'Password', type: 'password', placeholder: 'Password', required: false, rule: passwordRules }
   ];
   const formData = reactive<{ [key: string]: string; }>({});
   fields.forEach(f => (formData[f.name] = ''));
 
-
-
-
   const errors = reactive<{ [key: string]: string | null }>({});
+
+  const serverErrors = reactive<{ [key: string]: string | null  }>({
+    email: null,
+    password: null
+  });
 
   async function handleSubmit() {
     let valid = true;
@@ -71,24 +74,38 @@
       const response = await axios.post(props.endpoint, formData);
       // Exemple : si inscription, rediriger vers la vérification
       if (isRegister.value && response) {
-          // router.push({ path: "/verify", query: { email: formData.email } });
         localStorage.setItem('emailToVerify', formData.email);
         router.push("/verify");
       } else {
         router.push("/Welcome"); // ou autre page
       }
     } catch (error: any) {
-      // console.error("❌ API error:", error.response?.data || error.message);
+       console.error("❌ API error:", error.response?.data || error.message);
 
-      if (axios.isAxiosError(error) && error.response?.data?.message === 'Email non vérifié. Vérifiez votre boîte mail.') {
-        localStorage.setItem('emailToVerify', formData.email);
-        router.push("/verify");
+      if (axios.isAxiosError(error)) {
+        const msg = error.response?.data?.message;
+
+        if (msg === "Utilisateur introuvable") {
+          serverErrors.email = "This email does not exist";
+        }
+        if (msg === "Mot de passe incorrect") {
+          serverErrors.password = "Incorrect password";
+        }
+        if (msg === "Email non vérifié. Vérifiez votre boîte mail.") {
+          localStorage.setItem('emailToVerify', formData.email);
+          router.push("/verify");
+        }
+        // -----------
+
+         if (msg === "Utilisateur déjà existant") {
+          serverErrors.email = "This email already exists ";
+        }
+
       }
 
 
     }
   }
-
 
 </script>
 
@@ -96,8 +113,14 @@
   <form @submit.prevent="handleSubmit" class="auth-form">
 
     <div v-for="field in fields" :key="field.name">
-      <FormField v-model="formData[field.name]" :label="field.label" :type="field.type" :placeholder="field.placeholder"
-        :rules="field.rule"   />
+      <FormField v-model="formData[field.name]" 
+      :label="field.label" 
+      :type="field.type" 
+      :placeholder="field.placeholder" 
+      :ServerError="!!serverErrors[field.name]"
+      @serverMessage="val => serverErrors[field.name] = val"
+      :rules="field.rule" 
+      :serverMessage="serverErrors[field.name]"  />
     </div>
     <Button :text="buttonText" />
     <p class="text-register" v-if="isRegister">By clicking continuer you agree to our Terms ot Service <br></br>
