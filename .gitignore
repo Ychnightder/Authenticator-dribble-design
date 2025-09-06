@@ -37,3 +37,4 @@ suggestion IA/docs
 Backend/.env.development
 Backend/.env.production
 Backend/modules/user/user.test.http
+Backend/config/users.json
