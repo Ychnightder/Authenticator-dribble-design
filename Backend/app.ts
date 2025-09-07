@@ -12,7 +12,10 @@ app.use(cors());
 
 app.use(
 	cors({
-		origin: 'http://localhost:5173', // ou "*" pour autoriser tous les domaines (moins sécurisé)
+		origin: [
+			'http://localhost:5173', // pour dev
+			'https://authenticator-dribble-design-bfxn.vercel.app', // ton frontend Vercel
+		],
 		methods: ['GET', 'POST', 'PUT', 'DELETE'],
 		credentials: true, // si tu utilises les cookies
 	})
