@@ -8,7 +8,7 @@ const ip = process.env.IP || '127.0.0.1';
 const port = process.env.PORT || 3000;
 const HOST = '0.0.0.0';
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 app.use(
 	cors({
