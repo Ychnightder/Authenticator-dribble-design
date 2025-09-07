@@ -12,12 +12,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: [
-			'http://localhost:5173', // pour dev
-			'https://authenticator-dribble-design-bfxn.vercel.app', // ton frontend Vercel
-		],
-		methods: ['GET', 'POST', 'PUT', 'DELETE'],
-		credentials: true, // si tu utilises les cookies
+		origin: '*',
 	})
 );
 app.use(express.json());
